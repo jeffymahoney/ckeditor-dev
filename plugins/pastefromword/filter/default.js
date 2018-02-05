@@ -128,6 +128,13 @@
 						}
 					}
 
+					// Adapt paragraph formatting to editor's convention according to enter-mode (#423).
+					if ( editor.config.enterMode == CKEDITOR.ENTER_BR ) {
+						// We suffer from attribute/style lost in this situation.
+						delete element.name;
+						element.add( new CKEDITOR.htmlParser.element( 'br' ) );
+					}
+
 					Style.createStyleStack( element, filter, editor );
 				},
 				'pre': function( element ) {
